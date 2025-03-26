@@ -1,0 +1,25 @@
+{
+  "name": "chain-server",
+  "version": "1.0.0",
+  "description": "Middle-man server between Warehouse front-end and Tun server where the blockchain resides",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alipultra/chain-server.git"
+  },
+  "author": "alipultra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alipultra/chain-server/issues"
+  },
+  "homepage": "https://github.com/alipultra/chain-server#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "tuner": "file:tuner/"
+  }
+}
