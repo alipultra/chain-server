@@ -14,12 +14,26 @@ BaseTun.schemaDef = {
                 properties: {
                     id: { type: 'string' },
                     status: { type: 'string' },
+                    user: { 
+                        type: 'object', 
+                        properties: { 
+                            userid: 'string',
+                            username: 'string'
+                        } 
+                    },
                     date: { type: 'number' }
                 }
             }
         },
         id: { type: 'string' },
         status: { type: 'string' },
+        user: {
+            type: 'object',
+            properties: {
+                userid: 'string',
+                username: 'string'
+            }
+        },
         date: { type: 'number' }
     }
 }
