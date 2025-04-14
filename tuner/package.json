@@ -1,0 +1,33 @@
+{
+  "name": "tuner",
+  "version": "1.2.0",
+  "description": "Generic middle-man server between tun and client apps",
+  "main": "tuner.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "blockchain",
+    "helper",
+    "rethink",
+    "js-data",
+    "db",
+    "middle-man"
+  ],
+  "author": "asalip.putra@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "clone": "^1.0.4",
+    "js-data": "^3.0.2",
+    "js-data-rethinkdb": "^3.0.0",
+    "moment": "^2.21.0",
+    "rethinkdbdash": "^2.3.31",
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4"
+  }
+}
