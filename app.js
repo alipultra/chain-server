@@ -1,10 +1,18 @@
 process.title = 'chain-server';
 
-var express = require('expresss');
+var express = require('express');
 var app = express();
 var http = require('http');
 var server = http.createServer(app);
 var webSocketServer = require('socket.io')(server);
+
+const Item = require('./services/item');
+const ItemService = require('./services/item.service');
+const ItemDef = require('./services/itemdef');
+const ItemDefService = require('./services/itemdef.service');
+
+const mapperDefs = [ Item.dataStoreDef, ItemDef.dataStoreDef ];
+const serviceClasses = [ ItemService, ItemDefService ];
 
 var config = require('./config');
 var Tuner = require('tuner');
