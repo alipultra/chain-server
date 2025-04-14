@@ -46,6 +46,45 @@ class BaseService {
             return { error: true, reason: 'invalid token' }
         }
     }
+    getIssueUpdateId(issue) {
+        return issue.id + '-' + issue.date;
+    }
+    async go(token, itemId, next, data) {
+        const result = await this.tunService.go(itemId, next, data, token);
+        if (result) {
+            this.recentGoResult[this.getIssueUpdateId(result)] = true;
+            var issue = await this.processUpdatedIssue(result);
+            return issue;
+        }
+        else {
+            return false;
+        }
+    }
+    async getUpdatedIssueDataStoreCommand(issue) {
+        var dbItem = await this.dataStore.store.find(this.tunService.chainId, issue.id);
+        if (dbItem) {
+            return this.storeCommands.update;
+        }
+        else {
+            return this.storeCommands.create;
+        }
+    }
+    async processUpdatedIssue(interpretedBlock) {
+        var issue = await this.tunService.getChainItem(interpretedBlock.id);
+        var storeCommand = await this.getUpdatedIssueDataStoreCommand(issue);
+        var dbItem = await this.dataStore.store.find(this.tunService.chainId, interpretedBlock.id);
+        if (storeCommand === this.storeCommands.update) {
+            await this.dataStore.store.update(this.tunService.chainId, interpretedBlock.id, issue);
+        }
+        else if (storeCommand === this.storeCommands.create) {
+            await this.dataStore.store.create(this.tunService.chainId, issue);
+        }
+        else if (storeCommand === this.storeCommands.destroy) {
+            await this.dataStore.store.destroy(this.tunService.chainId, interpretedBlock.id);
+            issue = null;
+        }
+        return issue;
+    }
     async onChainEvent(chainId, interpretedBlock) {
         console.log('BaseService.onChainEvent:', chainId, interpretedBlock);
         const self = this;
